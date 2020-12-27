@@ -38,4 +38,11 @@ public class CadastroCozinha {
 		
 		return entityManager.find(Cozinha.class, id);
 	}
+	
+	@Transactional
+	public void delete( Cozinha cozinha ) {
+		
+		cozinha = findById(cozinha.getId());
+		entityManager.remove(cozinha);
+	}
 }
