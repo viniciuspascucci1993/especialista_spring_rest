@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.vinicius.algafoodapi.AlgafoodApiApplication;
 import com.vinicius.algafoodapi.domain.model.Cozinha;
+import com.vinicius.algafoodapi.repositories.CozinhaRepository;
 
 public class UpdateCozinhaMain {
 
@@ -15,13 +16,13 @@ public class UpdateCozinhaMain {
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		CadastroCozinha cadastroCozinha= applicationContext.getBean(CadastroCozinha.class);
+		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
 		
 		Cozinha cozinha = new Cozinha();
 		cozinha.setId(2L);
 		cozinha.setNome("Cozinha Brasileira");
 		
-		cadastroCozinha.save(cozinha);
+		cozinhaRepository.save(cozinha);
 		
 		System.out.printf("%d - %s\n", cozinha.getId(), cozinha.getNome() );
 	}

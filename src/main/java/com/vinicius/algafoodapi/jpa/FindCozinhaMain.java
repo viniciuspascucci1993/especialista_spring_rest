@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.vinicius.algafoodapi.AlgafoodApiApplication;
 import com.vinicius.algafoodapi.domain.model.Cozinha;
+import com.vinicius.algafoodapi.repositories.CozinhaRepository;
 
 public class FindCozinhaMain {
 
@@ -15,9 +16,9 @@ public class FindCozinhaMain {
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		CadastroCozinha cadastroCozinha= applicationContext.getBean(CadastroCozinha.class);
+		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
 		
-		Cozinha findById = cadastroCozinha.findById(2L);
+		Cozinha findById = cozinhaRepository.findById(2L);
 		
 		System.out.println( findById.getNome() );
 	}

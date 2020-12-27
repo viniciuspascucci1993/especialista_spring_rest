@@ -1,4 +1,4 @@
-package com.vinicius.algafoodapi.jpa;
+package com.vinicius.algafoodapi.infrastructure;
 
 import java.util.List;
 
@@ -10,17 +10,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vinicius.algafoodapi.domain.model.Cozinha;
+import com.vinicius.algafoodapi.repositories.CozinhaRepository;
 
-/**
- * Classe para realizar cadastro de uma nova coznha.
- * @author Vinicius-PC - Vinicius Torres Pascucci.
- */
 @Component
-public class CadastroCozinha {
-	
+public class CozinhaServiceImpl implements CozinhaRepository {
+
+
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	@Override
 	public List<Cozinha> listar() {
 		
 		TypedQuery<Cozinha> createQuery = entityManager.createQuery("from Cozinha", Cozinha.class);
@@ -29,20 +28,25 @@ public class CadastroCozinha {
 	}
 	
 	@Transactional
+	@Override
 	public Cozinha save( Cozinha cozinha ) {
 		
 		return entityManager.merge(cozinha);
 	}
 	
+	@Override
 	public Cozinha findById(Long id) {
 		
 		return entityManager.find(Cozinha.class, id);
 	}
 	
 	@Transactional
+	@Override
 	public void delete( Cozinha cozinha ) {
 		
 		cozinha = findById(cozinha.getId());
 		entityManager.remove(cozinha);
 	}
+
+	
 }

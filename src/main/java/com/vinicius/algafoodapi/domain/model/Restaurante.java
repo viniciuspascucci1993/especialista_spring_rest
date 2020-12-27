@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
 * Classe Restaurante que irá representar uma tabela na base de dados algafood.
@@ -25,10 +27,15 @@ public class Restaurante implements Serializable {
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private Long id;
 	
+	@Column(nullable = false)
 	private String nome;
 
-	@Column( name = "taxa_frete")
+	@Column( name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
+	
+	@ManyToOne
+	@JoinColumn( name = "cozinha_id", nullable = false)
+	private Cozinha cozinha;
 	
 	/* Construtor default*/
 	public Restaurante() { }
@@ -38,12 +45,14 @@ public class Restaurante implements Serializable {
 	 * @param id - Long - identificador restaurante.
 	 * @param nome - String - nome do restaurante.
 	 * @param taxaFrete - BigDecimal - taxa do frete.
+	 * @param cozinha - Cozinha - cozinha do restaurante.
 	 */
-	public Restaurante(Long id, String nome, BigDecimal taxaFrete) {
+	public Restaurante(Long id, String nome, BigDecimal taxaFrete, Cozinha cozinha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.taxaFrete = taxaFrete;
+		this.cozinha = cozinha;
 	}
 
 	/**
@@ -92,6 +101,23 @@ public class Restaurante implements Serializable {
 	 */
 	public void setTaxaFrete(final BigDecimal taxaFrete) {
 		this.taxaFrete = taxaFrete;
+	}
+	
+
+	/**
+	 * Metodo get().
+	 * @return cozinha - Cozinha - cozinha.
+	 */
+	public Cozinha getCozinha() {
+		return this.cozinha;
+	}
+
+	/**
+	 * Metodo set().
+	 * @param cozinha - Cozinha - cozinha.
+	 */
+	public void setCozinha(final Cozinha cozinha) {
+		this.cozinha = cozinha;
 	}
 
 	/**
