@@ -2,7 +2,6 @@ package com.vinicius.algafoodapi.domain.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +29,6 @@ public class Cozinha implements Serializable{
 	/**
 	 * Representa o nome da cozinha.
 	 */
-	@Column( name = "nome_cozinha")
 	private String nome;
 	
 	/* Construtor default*/
