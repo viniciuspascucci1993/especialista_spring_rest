@@ -32,6 +32,10 @@ public class CadastroCozinha {
 	public Cozinha save( Cozinha cozinha ) {
 		
 		return entityManager.merge(cozinha);
+	}
+	
+	public Cozinha findById(Long id) {
 		
+		return entityManager.find(Cozinha.class, id);
 	}
 }
