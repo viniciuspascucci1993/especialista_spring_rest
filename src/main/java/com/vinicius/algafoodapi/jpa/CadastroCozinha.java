@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vinicius.algafoodapi.domain.model.Cozinha;
 
@@ -25,5 +26,12 @@ public class CadastroCozinha {
 		TypedQuery<Cozinha> createQuery = entityManager.createQuery("from Cozinha", Cozinha.class);
 		
 		return createQuery.getResultList();
+	}
+	
+	@Transactional
+	public Cozinha save( Cozinha cozinha ) {
+		
+		return entityManager.merge(cozinha);
+		
 	}
 }

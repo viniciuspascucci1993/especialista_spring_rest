@@ -1,7 +1,5 @@
 package com.vinicius.algafoodapi.jpa;
 
-import java.util.List;
-
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
@@ -9,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import com.vinicius.algafoodapi.AlgafoodApiApplication;
 import com.vinicius.algafoodapi.domain.model.Cozinha;
 
-public class ConsultaCozinhaMain {
+public class InclusaoCozinhaMain {
 
 	public static void main(String[] args) {
 		
@@ -19,12 +17,17 @@ public class ConsultaCozinhaMain {
 		
 		CadastroCozinha cadastroCozinha= applicationContext.getBean(CadastroCozinha.class);
 		
-		List<Cozinha> listCozinhas = cadastroCozinha.listar();
+		Cozinha cozinha1 = new Cozinha();
+		cozinha1.setNome("Cozinha Brasileira");
 		
-		for (Cozinha cozinha : listCozinhas) {
-			
-			System.out.println(cozinha.getNome());
-		}
+		Cozinha cozinha2 = new Cozinha();
+		cozinha2.setNome("Cozinha Japonesa");
+		
+		cozinha1 = cadastroCozinha.save(cozinha1);
+		cozinha2 = cadastroCozinha.save(cozinha2);
+		
+		System.out.printf("%d - %s\n", cozinha1.getId(), cozinha1.getNome() );
+		System.out.printf("%d - %s\n", cozinha2.getId(), cozinha2.getNome() );
 	}
 	
 
